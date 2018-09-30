@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Работники";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Работники</title>
+</head>
+<body>
+    <div>
+        <a href="~/Home/CreateEmployee"><h4>Добавить работника</h4></a>
+    </div>
+    <div>
+        <table class="standard-table">
+            <thead>
+                <tr>
+                    <td>Имя</td>
+                    <td>Фамилия</td>
+                    <td>Отчество</td>
+                    <td>Электронный адрес</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in ViewBag.Employees)
+                {
+                    <tr>
+                        <td>@employee.Name</td>
+                        <td>@employee.Surname</td>
+                        <td>@employee.Patronymic</td>
+                        <td>@employee.Email</td>
+                        <td><a href="/Home/EditEmployee/@employee.Id">Редактировать</a></td>
+                        <td><a href="/Home/DeleteEmployee/@employee.Id">Удалить</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Подтверждение удаления";
+}
+
+@model SibersProjectsData.Models.Employee
+
+<h2>Удостоверьтесь, что вы хотите удалить работника @Model.Name @Model.Surname</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}
+<a href="/Home/Employees"><input type="button" value="Отменить"/></a>

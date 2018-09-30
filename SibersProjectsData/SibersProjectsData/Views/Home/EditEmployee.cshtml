@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Редактирование работника";
+}
+
+@model SibersProjectsData.Models.Employee
+
+<h2>Работник: "@Model.Name @Model.Surname"</h2>
+
+@using (Html.BeginForm("EditEmployee", "Home", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(model => model.Id)
+        @Html.LabelFor(model => model.Name, "Имя")
+        @Html.EditorFor(model => model.Name)
+        <br />
+        @Html.LabelFor(model => model.Surname, "Фамилия")
+        @Html.EditorFor(model => model.Surname)
+        <br />
+        @Html.LabelFor(model => model.Patronymic, "Отчество")
+        @Html.EditorFor(model => model.Patronymic)
+        <br />
+        @Html.LabelFor(model => model.Email, "Электронный адрес")
+        @Html.EditorFor(model => model.Email)
+        <br />
+        <input type="submit" value="Обновить" />
+    </fieldset>
+}

@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Проекты";
+}
+
+@model SibersProjectsData.Models.ProjectFilter
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Проекты</title>
+</head>
+<body>
+    <div>
+        <a href="/Home/Employees"><h3>Работники</h3></a>
+    </div>
+    <div>
+        <a href="/Home/CreateProject"><h4>Добавить проект</h4></a>
+    </div>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+                <table class="filter-table">
+                    <thead>
+                    <tr>
+                        <th>Диапозон начала проекта</th>
+                        <th>Диапозон конца проекта</th>
+                        <th>Приоритет</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>@Html.EditorFor(model => model.StartProjectDateStart)</td>
+                        <td>@Html.EditorFor(model => model.EndProjectDateStart)</td>
+                        <td>@Html.EditorFor(model => model.PrioritiesMin, new { htmlAttributes = new { placeholder = "Минимальный" } })</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.EditorFor(model => model.StartProjectDateEnd)</td>
+                        <td>@Html.EditorFor(model => model.EndProjectDateEnd)</td>
+                        <td>@Html.EditorFor(model => model.PrioritiesMax, new { htmlAttributes = new { placeholder = "Максимальный" } })</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <input type="submit" value="Фильтровать" />
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        <table class="standard-table">
+            <thead>
+                <tr>
+                    <td>@Html.ActionLink("Название", "Projects", new { sortOrder = ViewBag.NameSortParm })</td>
+                    <td>Компания-заказчик</td>
+                    <td>Компания-исполнитель</td>
+                    <td>Руководитель</td>
+                    <td>Исполнитель</td>
+                    <td>@Html.ActionLink("Дата начала", "Projects", new { SortOrder = ViewBag.DateSortParm })</td>
+                    <td>Дата окончания</td>
+                    <td>@Html.ActionLink("Приоритет", "Projects", new { SortOrder = ViewBag.PrioritySortParm })</td>
+                    <td>Комментарий</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in ViewBag.Projects)
+                {
+                    <tr>
+                        <td>@project.ProjectName</td>
+                        <td>@project.CustomerName</td>
+                        <td>@project.ImplementerName</td>
+                        <td>
+                            @if (project.Chief != null)
+                            {
+                                @project.Chief.Surname
+                            }
+                            @if (project.Chief == null)
+                            {
+                                <p>Не назначен</p>
+                            }
+                        </td>
+                        <td>
+                            @if (project.Implementer != null)
+                            {
+                                @project.Implementer.Surname
+                            }
+                            @if (project.Implementer == null)
+                            {
+                                <p>Не назначен</p>
+                            }
+                        </td>
+                        <td>@project.StartProjectDate.ToShortDateString()</td>
+                        <td>@project.EndProjectDate.ToShortDateString()</td>
+                        <td>@project.Priority</td>
+                        <td>@project.Comment</td>
+                        <td><a href="/Home/EditProject/@project.Id">Редактировать</a></td>
+                        <td><a href="/Home/DeleteProject/@project.Id">Удалить</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>

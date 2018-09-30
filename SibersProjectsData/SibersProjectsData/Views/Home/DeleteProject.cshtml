@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Подтверждение удаления";
+}
+
+@model SibersProjectsData.Models.Project
+
+<h2>Удостоверьтесь, что вы хотите удалить проект "@Model.ProjectName"</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}
+
+<a href="/Home/Projects"><input type="button" value="Отменить" /></a>

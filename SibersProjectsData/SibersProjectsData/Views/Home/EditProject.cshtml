@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Редактирование проекта";
+}
+
+@model SibersProjectsData.Models.Project
+
+<h2>Проект: "@Model.ProjectName"</h2>
+
+@using (Html.BeginForm("EditProject", "Home", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(model => model.Id)
+        @Html.LabelFor(model => model.ProjectName, "Название")
+        @Html.EditorFor(model => model.ProjectName)
+        <br />
+        @Html.LabelFor(model => model.CustomerName, "Компания-заказчик")
+        @Html.EditorFor(model => model.CustomerName)
+        <br />
+        @Html.LabelFor(model => model.ImplementerName, "Компания-исполнитель")
+        @Html.EditorFor(model => model.ImplementerName)
+        <br />
+        @Html.LabelFor(model => model.ChiefId, "Руководитель")
+        @Html.DropDownListFor(model => model.ChiefId, ViewBag.Employees as SelectList)
+        <br />
+        @Html.LabelFor(model => model.ImplementerId, "Исполнитель")
+        @Html.DropDownListFor(model => model.ImplementerId, ViewBag.Employees as SelectList)
+        <br />
+        @Html.LabelFor(model => model.StartProjectDate, "Дата начала")
+        @Html.EditorFor(model => model.StartProjectDate)
+        <br />
+        @Html.LabelFor(model => model.EndProjectDate, "Дата конца")
+        @Html.EditorFor(model => model.EndProjectDate)
+        <br />
+        @Html.LabelFor(model => model.Priority, "Приоритет")
+        @Html.EditorFor(model => model.Priority)
+        <br />
+        @Html.LabelFor(model => model.Comment, "Комментарий")
+        @Html.EditorFor(model => model.Comment)
+        <br />
+        <input type="submit" value="Обновить" />
+    </fieldset>
+}
